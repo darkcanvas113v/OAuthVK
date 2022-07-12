@@ -1,0 +1,65 @@
+plugins {
+  id 'com.android.application'
+  id 'org.jetbrains.kotlin.android'
+  id 'kotlin-kapt'
+}
+
+android {
+  compileSdk 32
+
+  defaultConfig {
+    applicationId "com.sillyapps.oauthvk"
+    minSdk 21
+    targetSdk 32
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
+  buildFeatures {
+    compose true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion versions.compose
+  }
+}
+
+dependencies {
+  coreLibraryDesugaring desugaringDep
+
+  implementation coreKtx
+  implementation appCompat
+
+  implementation composeDeps.runtime
+  implementation composeDeps.ui
+  implementation composeDeps.uiTooling
+  implementation composeDeps.foundation
+  implementation composeDeps.foundationLayout
+  implementation composeDeps.material
+  implementation composeDeps.materialIcons
+  implementation composeDeps.materialIconsExtended
+  implementation composeDeps.activity
+  implementation composeDeps.viewModel
+  implementation composeDeps.navigation
+
+  implementation daggerDeps.core
+  kapt daggerDeps.annotationProcessor
+
+  testImplementation junitDeps.core
+  androidTestImplementation junitDeps.android
+  androidTestImplementation junitDeps.espresso
+}
