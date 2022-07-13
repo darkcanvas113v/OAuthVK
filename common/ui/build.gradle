@@ -1,20 +1,17 @@
 plugins {
-  id 'com.android.application'
+  id 'com.android.library'
   id 'org.jetbrains.kotlin.android'
-  id 'kotlin-kapt'
 }
 
 android {
-  compileSdk 32
+  compileSdk 31
 
   defaultConfig {
-    applicationId "com.sillyapps.oauthvk"
     minSdk 21
-    targetSdk 32
-    versionCode 1
-    versionName "1.0"
+    targetSdk 31
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -39,20 +36,11 @@ android {
 }
 
 dependencies {
-  implementation project(":common:ui")
-
-  implementation project(":domain:vk")
-  implementation project(":data:vk")
-
-  implementation project(":features:album")
-  implementation project(":features:auth-screen")
-  implementation project(":features:picture")
-
-  coreLibraryDesugaring desugaringDep
 
   implementation coreKtx
   implementation appCompat
 
+  // Compose
   implementation composeDeps.runtime
   implementation composeDeps.ui
   implementation composeDeps.uiTooling
@@ -64,9 +52,6 @@ dependencies {
   implementation composeDeps.activity
   implementation composeDeps.viewModel
   implementation composeDeps.navigation
-
-  implementation daggerDeps.core
-  kapt daggerDeps.annotationProcessor
 
   testImplementation junitDeps.core
   androidTestImplementation junitDeps.android

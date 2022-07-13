@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="OAuthVK.app" target="11" />
+      <module name="OAuthVK.common.ui" target="11" />
+      <module name="OAuthVK.data.vk" target="11" />
+      <module name="OAuthVK.features.album" target="11" />
+      <module name="OAuthVK.features.auth-screen" target="11" />
+      <module name="OAuthVK.features.picture" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

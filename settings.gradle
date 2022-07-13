@@ -15,3 +15,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "OAuthVK"
 include ':app'
+include ':domain:vk'
+include ':data:vk'
+include ':features:auth-screen'
+include ':features:album'
+include ':features:picture'
+include ':common:ui'
