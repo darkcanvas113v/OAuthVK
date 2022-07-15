@@ -1,17 +1,17 @@
 plugins {
   id 'com.android.library'
   id 'org.jetbrains.kotlin.android'
-  id 'kotlin-kapt'
 }
 
 android {
-  compileSdk 32
+  compileSdk 31
 
   defaultConfig {
     minSdk 21
-    targetSdk 32
+    targetSdk 31
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -36,38 +36,14 @@ android {
 }
 
 dependencies {
-  implementation project(":core:di")
-  implementation project(":core:ui")
-
-  implementation project(":common:ui")
-
-  implementation project(":domain:auth")
-  implementation project(":data:auth")
-
-  coreLibraryDesugaring desugaringDep
-
   implementation coreKtx
-  implementation appCompat
+  implementation lifecycleDeps.viewModel
 
+  // Compose
   implementation composeDeps.runtime
   implementation composeDeps.ui
   implementation composeDeps.uiTooling
-  implementation composeDeps.foundation
-  implementation composeDeps.foundationLayout
   implementation composeDeps.material
-  implementation composeDeps.materialIcons
-  implementation composeDeps.materialIconsExtended
-  implementation composeDeps.activity
   implementation composeDeps.viewModel
   implementation composeDeps.navigation
-
-  implementation daggerDeps.core
-  kapt daggerDeps.annotationProcessor
-
-  implementation moshiDeps.core
-  kapt moshiDeps.codegen
-
-  testImplementation junitDeps.core
-  androidTestImplementation junitDeps.android
-  androidTestImplementation junitDeps.espresso
 }

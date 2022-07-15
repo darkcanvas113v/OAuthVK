@@ -2,4 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.sillyapps.oauthvk.features.auth_screen">
 
+  <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

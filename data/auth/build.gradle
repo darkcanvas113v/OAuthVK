@@ -12,6 +12,7 @@ android {
     targetSdk 32
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -27,39 +28,16 @@ android {
   kotlinOptions {
     jvmTarget = '1.8'
   }
-  buildFeatures {
-    compose true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion versions.compose
-  }
 }
 
 dependencies {
+  implementation project(':domain:auth')
   implementation project(":core:di")
-  implementation project(":core:ui")
-
-  implementation project(":common:ui")
-
-  implementation project(":domain:auth")
-  implementation project(":data:auth")
-
-  coreLibraryDesugaring desugaringDep
 
   implementation coreKtx
-  implementation appCompat
 
-  implementation composeDeps.runtime
-  implementation composeDeps.ui
-  implementation composeDeps.uiTooling
-  implementation composeDeps.foundation
-  implementation composeDeps.foundationLayout
-  implementation composeDeps.material
-  implementation composeDeps.materialIcons
-  implementation composeDeps.materialIconsExtended
-  implementation composeDeps.activity
-  implementation composeDeps.viewModel
-  implementation composeDeps.navigation
+  implementation coroutinesDeps.core
+  implementation coroutinesDeps.android
 
   implementation daggerDeps.core
   kapt daggerDeps.annotationProcessor
