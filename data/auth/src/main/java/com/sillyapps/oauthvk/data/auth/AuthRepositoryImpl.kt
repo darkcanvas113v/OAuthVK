@@ -6,6 +6,8 @@ import com.sillyapps.oauthvk.data.auth.model.toDataModel
 import com.sillyapps.oauthvk.data.auth.model.toDomainModel
 import com.sillyapps.oauthvk.domain.auth.AuthRepository
 import com.sillyapps.oauthvk.domain.auth.model.AccessInfo
+import com.sillyapps.oauthvk.domain.auth.model.AccessInfoState
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -23,6 +25,10 @@ class AuthRepositoryImpl @Inject constructor(
 
   override suspend fun getAccessInformation(): AccessInfo? {
     return accessInfoDataSource.getAccessInfo()?.toDomainModel()
+  }
+
+  override fun getAccessInfoState(): Flow<AccessInfoState> {
+    return accessInfoDataSource.getAccessInfoState()
   }
 
 }

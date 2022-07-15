@@ -39,10 +39,14 @@ android {
 }
 
 dependencies {
+  implementation project(":core:di")
+
   implementation project(":common:ui")
 
   implementation project(":domain:vk")
   implementation project(":data:vk")
+  implementation project(":domain:auth")
+  implementation project(":data:auth")
 
   implementation project(":features:album")
   implementation project(":features:auth-screen")

@@ -1,4 +1,4 @@
-package com.sillyapps.oauthvk.data.auth.model
+package com.sillyapps.oauthvk.domain.auth.model
 
 sealed class AccessInfoState() {
 

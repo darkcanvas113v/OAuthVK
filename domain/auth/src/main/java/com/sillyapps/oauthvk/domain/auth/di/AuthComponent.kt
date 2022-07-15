@@ -7,6 +7,8 @@ import dagger.Component
 @Component
 interface AuthComponent {
 
+  fun getRepository(): AuthRepository
+
   @Component.Builder
   interface Builder {
 

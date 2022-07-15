@@ -3,9 +3,8 @@ package com.sillyapps.oauthvk.data.auth.datasources.accessinfo
 import android.content.SharedPreferences
 import com.sillyapps.oauthvk.data.auth.AuthConstants
 import com.sillyapps.oauthvk.data.auth.model.AccessInfoDataModel
-import com.sillyapps.oauthvk.data.auth.model.AccessInfoState
 import com.sillyapps.oauthvk.data.auth.model.isValid
-import com.sillyapps.oauthvk.domain.auth.model.AccessInfo
+import com.sillyapps.oauthvk.domain.auth.model.AccessInfoState
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
