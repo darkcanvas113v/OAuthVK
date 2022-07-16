@@ -13,7 +13,7 @@ class MainActivity: ComponentActivity() {
     val app = (application as App)
 
     setContent {
-      RootContainer()
+      RootContainer(authComponent = app.authComponent)
     }
   }
 
