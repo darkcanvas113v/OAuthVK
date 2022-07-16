@@ -6,18 +6,23 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class AccessInfoDataModel(
   val token: String,
+  val createdIn: Long,
   val expiresIn: Long,
   val userId: Int
 )
 
 fun AccessInfoDataModel.toDomainModel(): AccessInfo {
-  return AccessInfo(token, expiresIn, userId)
+  return AccessInfo(token, createdIn, expiresIn, userId)
 }
 
 fun AccessInfo.toDataModel(): AccessInfoDataModel {
-  return AccessInfoDataModel(token, expiresIn, userId)
+  return AccessInfoDataModel(token, createdIn, expiresIn, userId)
 }
 
 fun AccessInfoDataModel.isValid(): Boolean {
-  return token.isNotBlank() && expiresIn > 0
+  // some offset to minimize cases then token is invalidated while user interacting with the app
+  val eps = 5 * 60000
+
+  return token.isNotBlank() &&
+      System.currentTimeMillis() - createdIn > expiresIn + eps
 }

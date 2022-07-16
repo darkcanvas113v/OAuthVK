@@ -66,8 +66,11 @@ class AccessInfoDataSourceImpl @Inject constructor(
       val expiresIn = map["expires_in"]?.toLongOrNull() ?: return null
       val token = map["access_token"] ?: return null
 
+      val createdIn = System.currentTimeMillis()
+
       return AccessInfoDataModel(
         userId = userId,
+        createdIn = createdIn,
         expiresIn = expiresIn,
         token = token
       )

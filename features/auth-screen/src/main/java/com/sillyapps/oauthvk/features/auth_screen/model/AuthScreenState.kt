@@ -8,6 +8,4 @@ sealed class AuthScreenState() {
 
   class Error(val messageResId: Int): AuthScreenState()
 
-  object Success
-
 }
