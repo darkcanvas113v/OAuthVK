@@ -40,6 +40,7 @@ android {
 
 dependencies {
   implementation project(":core:di")
+  implementation project(":core:ui")
 
   implementation project(":common:ui")
 
@@ -71,6 +72,9 @@ dependencies {
 
   implementation daggerDeps.core
   kapt daggerDeps.annotationProcessor
+
+  implementation coroutinesDeps.core
+  implementation coroutinesDeps.android
 
   testImplementation junitDeps.core
   androidTestImplementation junitDeps.android

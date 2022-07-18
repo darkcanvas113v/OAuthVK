@@ -9,7 +9,8 @@ import com.sillyapps.oauthvk.features.auth_screen.ui.AuthScreen
 
 @Composable
 fun AuthScreenNavigation(
-  authComponent: AuthComponent
+  authComponent: AuthComponent,
+  onAuthorized: () -> Unit
 ) {
 
   val component = DaggerAuthScreenComponent.builder()
@@ -24,7 +25,8 @@ fun AuthScreenNavigation(
 
   AuthScreen(
     stateHolder = viewModel,
-    mWebViewClient = webViewClient
+    mWebViewClient = webViewClient,
+    onAuthorized = onAuthorized
   )
 
 }

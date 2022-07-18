@@ -44,8 +44,6 @@ dependencies {
   implementation project(":domain:auth")
   implementation project(":data:auth")
 
-  coreLibraryDesugaring desugaringDep
-
   implementation coreKtx
   implementation appCompat
 

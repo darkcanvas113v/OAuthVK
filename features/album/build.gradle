@@ -1,6 +1,7 @@
 plugins {
   id 'com.android.library'
   id 'org.jetbrains.kotlin.android'
+  id 'kotlin-kapt'
 }
 
 android {
@@ -11,7 +12,6 @@ android {
     targetSdk 32
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -27,14 +27,48 @@ android {
   kotlinOptions {
     jvmTarget = '1.8'
   }
+  buildFeatures {
+    compose true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion versions.compose
+  }
 }
 
 dependencies {
+  implementation project(":core:di")
+  implementation project(":core:ui")
 
-  implementation 'androidx.core:core-ktx:1.7.0'
-  implementation 'androidx.appcompat:appcompat:1.4.2'
-  implementation 'com.google.android.material:material:1.6.1'
-  testImplementation 'junit:junit:4.13.2'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+  implementation project(":common:ui")
+
+  implementation project(":domain:vk")
+  implementation project(":domain:auth")
+  implementation project(":data:vk")
+
+  implementation coreKtx
+  implementation appCompat
+
+  implementation composeDeps.runtime
+  implementation composeDeps.ui
+  implementation composeDeps.uiTooling
+  implementation composeDeps.foundation
+  implementation composeDeps.foundationLayout
+  implementation composeDeps.material
+  implementation composeDeps.materialIcons
+  implementation composeDeps.materialIconsExtended
+  implementation composeDeps.activity
+  implementation composeDeps.viewModel
+  implementation composeDeps.navigation
+
+  implementation daggerDeps.core
+  kapt daggerDeps.annotationProcessor
+
+  implementation moshiDeps.core
+  kapt moshiDeps.codegen
+
+  implementation landscapistDep
+
+  testImplementation junitDeps.core
+  androidTestImplementation junitDeps.android
+  androidTestImplementation junitDeps.espresso
 }

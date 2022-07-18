@@ -1,44 +1,55 @@
 package com.sillyapps.oauthvk.ui.navigation
 
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.sillyapps.core.ui.util.navigateToTopDestination
 import com.sillyapps.oauthvk.domain.auth.di.AuthComponent
+import com.sillyapps.oauthvk.domain.auth.model.AccessInfo
 import com.sillyapps.oauthvk.domain.auth.model.AccessInfoState
+import com.sillyapps.oauthvk.domain.vk.di.VkComponent
+import com.sillyapps.oauthvk.features.album.api.AlbumScreenNavigation
 import com.sillyapps.oauthvk.features.auth_screen.api.AuthScreenNavigation
+import com.sillyapps.oauthvk.ui.SplashScreen
+import kotlinx.coroutines.launch
 
 @Composable
 fun AppNavHost(
   navController: NavHostController,
-  authComponent: AuthComponent
+  authComponent: AuthComponent,
+  vkComponent: VkComponent
 ) {
-
-  val accessInfoState by remember {
-    authComponent.getRepository().getAccessInfoState()
-  }.collectAsState(initial = AccessInfoState.Invalid)
-
-  val startDestination = when (accessInfoState) {
-    is AccessInfoState.Valid -> Screen.AlbumScreen.route
-    is AccessInfoState.Invalid -> Screen.AuthScreen.route
-  }
 
   NavHost(
     navController = navController,
-    startDestination = startDestination) {
-
+    startDestination = Screen.AuthScreen.route
+  ) {
     composable(route = Screen.AuthScreen.route) {
       AuthScreenNavigation(
-        authComponent = authComponent
+        authComponent = authComponent,
+        onAuthorized = {
+          navController.navigateToTopDestination(
+            route = Screen.AlbumScreen.route,
+          )
+        }
       )
     }
 
     composable(route = Screen.AlbumScreen.route) {
-      Text(text = "Success!")
+      AlbumScreenNavigation(
+        onItemClick = {},
+        vkComponent = vkComponent,
+        authComponent = authComponent,
+        onLogoutButtonClick = {
+          navController.navigateToTopDestination(
+            route = Screen.AuthScreen.route,
+          )
+        }
+      )
     }
 
     composable(route = Screen.PictureScreen.route) {

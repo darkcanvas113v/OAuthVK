@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="loading_from_server">Loading data from server. It could take several seconds.</string>
+
+</resources>

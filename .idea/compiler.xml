@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
+    <bytecodeTargetLevel target="1.8">
       <module name="OAuthVK.app" target="11" />
       <module name="OAuthVK.common.ui" target="11" />
-      <module name="OAuthVK.core.di" target="1.8" />
-      <module name="OAuthVK.core.di.main" target="1.8" />
-      <module name="OAuthVK.core.di.test" target="1.8" />
+      <module name="OAuthVK.core.network" target="11" />
       <module name="OAuthVK.core.ui" target="11" />
       <module name="OAuthVK.data.auth" target="11" />
       <module name="OAuthVK.data.vk" target="11" />
-      <module name="OAuthVK.domain.auth" target="1.8" />
-      <module name="OAuthVK.domain.auth.main" target="1.8" />
-      <module name="OAuthVK.domain.auth.test" target="1.8" />
       <module name="OAuthVK.features.album" target="11" />
       <module name="OAuthVK.features.auth-screen" target="11" />
       <module name="OAuthVK.features.picture" target="11" />

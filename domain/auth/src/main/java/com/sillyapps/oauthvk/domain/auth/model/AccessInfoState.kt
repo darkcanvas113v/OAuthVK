@@ -6,4 +6,6 @@ sealed class AccessInfoState() {
 
   object Valid: AccessInfoState()
 
+  object Initial: AccessInfoState()
+
 }

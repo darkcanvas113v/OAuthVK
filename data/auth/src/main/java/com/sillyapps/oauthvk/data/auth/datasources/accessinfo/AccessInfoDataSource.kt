@@ -8,8 +8,10 @@ interface AccessInfoDataSource {
 
   fun getAccessInfoState(): Flow<AccessInfoState>
 
-  suspend fun getAccessInfo(): AccessInfoDataModel?
+  fun getAccessInfo(): AccessInfoDataModel?
 
   fun saveAccessInfo(response: String)
+
+  fun forgetAccessInfo()
 
 }

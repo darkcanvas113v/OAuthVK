@@ -2,12 +2,12 @@ package com.sillyapps.oauthvk.data.auth
 
 import com.sillyapps.oauthvk.data.auth.datasources.accessinfo.AccessInfoDataSource
 import com.sillyapps.oauthvk.data.auth.datasources.authurl.AuthUrlDataSource
-import com.sillyapps.oauthvk.data.auth.model.toDataModel
 import com.sillyapps.oauthvk.data.auth.model.toDomainModel
 import com.sillyapps.oauthvk.domain.auth.AuthRepository
 import com.sillyapps.oauthvk.domain.auth.model.AccessInfo
 import com.sillyapps.oauthvk.domain.auth.model.AccessInfoState
 import kotlinx.coroutines.flow.Flow
+import org.json.JSONObject
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -23,7 +23,11 @@ class AuthRepositoryImpl @Inject constructor(
     accessInfoDataSource.saveAccessInfo(response)
   }
 
-  override suspend fun getAccessInformation(): AccessInfo? {
+  override fun forgetAccessInformation() {
+    accessInfoDataSource.forgetAccessInfo()
+  }
+
+  override fun getAccessInformation(): AccessInfo? {
     return accessInfoDataSource.getAccessInfo()?.toDomainModel()
   }
 

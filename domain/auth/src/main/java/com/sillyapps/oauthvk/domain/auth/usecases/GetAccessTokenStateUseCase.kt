@@ -3,10 +3,10 @@ package com.sillyapps.oauthvk.domain.auth.usecases
 import com.sillyapps.oauthvk.domain.auth.AuthRepository
 import javax.inject.Inject
 
-class GetAccessInfoUseCase @Inject constructor(
+class GetAccessTokenStateUseCase @Inject constructor(
   private val repository: AuthRepository
 ) {
 
-  suspend operator fun invoke() = repository.getAccessInformation()
+  operator fun invoke() = repository.getAccessInfoState()
 
 }
