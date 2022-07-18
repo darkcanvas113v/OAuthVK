@@ -1,12 +1,12 @@
 package com.sillyapps.oauthvk.data.vk.http_interceptors
 
-import com.sillyapps.oauthvk.data.vk.AccessTokenProvider
+import com.sillyapps.oauthvk.domain.auth.usecases.GetAccessTokenUseCase
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
 class AddAccessTokenInterceptor @Inject constructor(
-  private val accessTokenProvider: AccessTokenProvider
+  private val getAccessTokenUseCase: GetAccessTokenUseCase
 ) : Interceptor {
 
   override fun intercept(chain: Interceptor.Chain): Response {
@@ -14,7 +14,7 @@ class AddAccessTokenInterceptor @Inject constructor(
 
     val url = originalRequest.url.newBuilder().addQueryParameter(
       name = "access_token",
-      value = accessTokenProvider.provideAccessToken()
+      value = getAccessTokenUseCase()
     ).build()
 
     val requestWithAccessToken = originalRequest.newBuilder().url(url).build()

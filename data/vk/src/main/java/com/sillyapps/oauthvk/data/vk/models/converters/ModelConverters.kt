@@ -9,7 +9,7 @@ import com.sillyapps.oauthvk.domain.vk.models.Photo
 
 fun AlbumsDto.toDomainModel(): Albums {
   return Albums(
-    albums = albums.map { AlbumItem(id = it.id) }
+    list = albums.map { AlbumItem(id = it.id) }
   )
 }
 

@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface VkRepository {
 
-  fun getAlbums(forceLoad: Boolean = false): Flow<Resource<Albums>>
+  suspend fun getAlbums(): Resource<Albums>
 
-  fun getAlbumPhotos(albumId: Int, forceLoad: Boolean = false): Flow<Resource<Album>>
+  suspend fun getAlbum(albumId: Int): Resource<Album>
 
 }

@@ -94,4 +94,6 @@ ext {
       core: "com.squareup.okhttp3:okhttp:4.9.3",
       loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:4.9.3"
   ]
+
+  landscapistDep = "com.github.skydoves:landscapist-glide:1.5.0"
 }

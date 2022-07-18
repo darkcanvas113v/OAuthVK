@@ -72,6 +72,9 @@ dependencies {
   implementation daggerDeps.core
   kapt daggerDeps.annotationProcessor
 
+  implementation coroutinesDeps.core
+  implementation coroutinesDeps.android
+
   testImplementation junitDeps.core
   androidTestImplementation junitDeps.android
   androidTestImplementation junitDeps.espresso

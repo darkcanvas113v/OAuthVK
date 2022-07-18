@@ -10,7 +10,7 @@ interface AuthRepository {
 
   fun saveAccessInformation(response: String)
 
-  suspend fun getAccessInformation(): AccessInfo?
+  fun getAccessInformation(): AccessInfo?
 
   fun getAccessInfoState(): Flow<AccessInfoState>
 

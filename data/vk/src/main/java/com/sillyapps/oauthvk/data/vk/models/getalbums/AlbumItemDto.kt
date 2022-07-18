@@ -35,9 +35,9 @@ data class AlbumItemDto(
   @Json(name = "thumb_is_last")
   val thumbIsLast: Int,
 
-  @Json(name = "id")
+  @Json(name = "title")
   val title: String,
 
-  @Json(name = "id")
+  @Json(name = "updated")
   val updated: Long
 )

@@ -8,6 +8,6 @@ data class PrivacyListDto(
     @Json(name = "allowed")
     val allowed: List<Int>,
 
-    @Json(name = "allowed")
+    @Json(name = "excluded")
     val excluded: List<Int>
 )

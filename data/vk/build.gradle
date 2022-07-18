@@ -32,7 +32,10 @@ android {
 
 dependencies {
   implementation project(":core:di")
+  implementation project(":core:network")
+
   implementation project(":domain:vk")
+  implementation project(":domain:auth")
 
   implementation retrofitDeps.core
   implementation retrofitDeps.moshiConverter

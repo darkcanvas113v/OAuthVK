@@ -15,7 +15,6 @@ annotation class IOCoroutineScope
 @Module
 class IOModule {
   @Provides
-  @IODispatcher
   fun provideIODispatcher(): CoroutineDispatcher {
     return Dispatchers.IO
   }

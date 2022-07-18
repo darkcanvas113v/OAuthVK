@@ -1,55 +1,49 @@
 package com.sillyapps.oauthvk.data.vk
 
-import com.sillyapps.core.di.IOCoroutineScope
-import com.sillyapps.core.di.IODispatcher
 import com.sillyapps.core.util.model.Resource
+import com.sillyapps.core_network.retrofitErrorHandler
+import com.sillyapps.oauthvk.data.vk.models.VkApiResponse
 import com.sillyapps.oauthvk.data.vk.models.converters.toDomainModel
 import com.sillyapps.oauthvk.domain.vk.VkRepository
-import com.sillyapps.oauthvk.domain.vk.models.Album
 import com.sillyapps.oauthvk.domain.vk.models.Albums
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import retrofit2.Response
+import java.lang.Exception
 import javax.inject.Inject
 
 class VkRepositoryImpl @Inject constructor(
   private val vkApi: VkApi,
-  @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-  @IOCoroutineScope private val ioScope: CoroutineScope
-): VkRepository {
+  private val ioDispatcher: CoroutineDispatcher
+) : VkRepository {
 
-  private val albums = MutableStateFlow<Resource<Albums>>(
-    value = Resource.Initial()
-  )
-
-  private val album = MutableStateFlow<Resource<Album>>(
-    value = Resource.Initial()
-  )
-
-  override fun getAlbums(forceLoad: Boolean): Flow<Resource<Albums>> {
-    ioScope.launch(ioDispatcher) {
-      val shouldLoad = forceLoad || albums.value is Resource.Initial || albums.value is Resource.Error
-      if (shouldLoad) {
-        val value = vkApi.getAlbums().toDomainModel()
-
-        albums.value = Resource.Success(value)
-      }
-    }
-
-    return albums
+  override suspend fun getAlbums(): Resource<Albums> = withContext(ioDispatcher) {
+    makeApiCall(
+      apiResponse = vkApi.getAlbums(),
+      modelConverter = { it.toDomainModel() }
+    )
   }
 
-  override fun getAlbumPhotos(albumId: Int, forceLoad: Boolean): Flow<Resource<Album>> {
-    ioScope.launch(ioDispatcher) {
-      val shouldLoad = forceLoad || album.value is Resource.Initial || album.value is Resource.Error
-      if (shouldLoad) {
-        val value = vkApi.getAlbum(albumId).toDomainModel()
+  override suspend fun getAlbum(albumId: Int) = withContext(ioDispatcher) {
+    makeApiCall(
+      apiResponse = vkApi.getAlbum(albumId),
+      modelConverter = { it.toDomainModel() }
+    )
+  }
 
-        album.value = Resource.Success(value)
-      }
+  private fun <T, M> makeApiCall(
+    apiResponse: Response<VkApiResponse<T>>,
+    modelConverter: (T) -> M
+  ): Resource<M> {
+    return try {
+      val response = retrofitErrorHandler(apiResponse)
+      if (response.body != null)
+        Resource.Success(data = modelConverter(response.body))
+      else
+        Resource.Error(response.error?.errorMessage ?: "Unknown error!")
     }
-
-    return album
+    catch (e: Exception) {
+      Resource.Error(e.message ?: "Unknown error!")
+    }
   }
 
 
