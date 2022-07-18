@@ -42,6 +42,7 @@ dependencies {
   implementation project(":common:ui")
 
   implementation project(":domain:vk")
+  implementation project(":domain:auth")
   implementation project(":data:vk")
 
   implementation coreKtx

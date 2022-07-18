@@ -7,4 +7,6 @@ interface AlbumScreenStateHolder {
 
   fun getState(): Flow<AlbumScreenState>
 
+  fun logout()
+
 }

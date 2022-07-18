@@ -1,9 +1,6 @@
 package com.sillyapps.oauthvk.features.auth_screen.ui
 
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import com.sillyapps.oauthvk.data.auth.AuthConstants
 import com.sillyapps.oauthvk.domain.auth.usecases.SaveAccessInfoUseCase
 import javax.inject.Inject

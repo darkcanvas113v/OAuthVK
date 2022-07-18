@@ -8,7 +8,7 @@ data class VkApiError(
   @Json(name = "error_code")
   val errorCode: Int,
 
-  @Json(name = "error_message")
+  @Json(name = "error_msg")
   val errorMessage: String,
 
   @Json(name = "request_params")

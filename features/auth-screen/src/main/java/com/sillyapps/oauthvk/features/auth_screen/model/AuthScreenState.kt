@@ -4,8 +4,10 @@ sealed class AuthScreenState() {
 
   object Loading: AuthScreenState()
 
-  class Default(val url: String): AuthScreenState()
+  class Authorizing(val url: String): AuthScreenState()
 
   class Error(val messageResId: Int): AuthScreenState()
+
+  object Authorized: AuthScreenState()
 
 }

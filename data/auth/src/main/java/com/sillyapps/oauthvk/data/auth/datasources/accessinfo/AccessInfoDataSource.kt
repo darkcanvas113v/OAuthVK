@@ -12,4 +12,6 @@ interface AccessInfoDataSource {
 
   fun saveAccessInfo(response: String)
 
+  fun forgetAccessInfo()
+
 }

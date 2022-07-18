@@ -2,9 +2,12 @@ package com.sillyapps.oauthvk.ui.navigation
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.sillyapps.core.ui.util.navigateToTopDestination
 import com.sillyapps.oauthvk.domain.auth.di.AuthComponent
 import com.sillyapps.oauthvk.domain.auth.model.AccessInfo
 import com.sillyapps.oauthvk.domain.auth.model.AccessInfoState
@@ -21,28 +24,31 @@ fun AppNavHost(
   vkComponent: VkComponent
 ) {
 
-  val accessInfoState by remember {
-    authComponent.getAccessTokenStateUseCase().invoke()
-  }.collectAsState(initial = AccessInfoState.Initial)
-
   NavHost(
     navController = navController,
-    startDestination = Screen.SplashScreen.route) {
-
-    composable(route = Screen.SplashScreen.route) {
-      SplashScreen()
-    }
-
+    startDestination = Screen.AuthScreen.route
+  ) {
     composable(route = Screen.AuthScreen.route) {
       AuthScreenNavigation(
-        authComponent = authComponent
+        authComponent = authComponent,
+        onAuthorized = {
+          navController.navigateToTopDestination(
+            route = Screen.AlbumScreen.route,
+          )
+        }
       )
     }
 
     composable(route = Screen.AlbumScreen.route) {
       AlbumScreenNavigation(
         onItemClick = {},
-        vkComponent = vkComponent
+        vkComponent = vkComponent,
+        authComponent = authComponent,
+        onLogoutButtonClick = {
+          navController.navigateToTopDestination(
+            route = Screen.AuthScreen.route,
+          )
+        }
       )
     }
 
@@ -50,12 +56,6 @@ fun AppNavHost(
 
     }
 
-  }
-
-  when (accessInfoState) {
-    is AccessInfoState.Invalid -> navController.navigate(route = Screen.AuthScreen.route)
-    is AccessInfoState.Valid -> navController.navigate(route = Screen.AlbumScreen.route)
-    else -> {}
   }
 
 }

@@ -1,6 +1,7 @@
 package com.sillyapps.oauthvk.data.auth.datasources.accessinfo
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.sillyapps.oauthvk.data.auth.model.AccessInfoDataModel
 import com.sillyapps.oauthvk.data.auth.model.accessInfoFromUrl
 import com.sillyapps.oauthvk.data.auth.model.isValid
@@ -65,6 +66,13 @@ class AccessInfoDataSourceImpl @Inject constructor(
 
       sharedPref.edit().putString(ACCESS_INFO, json).apply()
       accessInfo.value = value
+    }
+  }
+
+  override fun forgetAccessInfo() {
+    scope.launch(ioDispatcher) {
+      sharedPref.edit().remove(ACCESS_INFO).apply()
+      accessInfo.value = null
     }
   }
 

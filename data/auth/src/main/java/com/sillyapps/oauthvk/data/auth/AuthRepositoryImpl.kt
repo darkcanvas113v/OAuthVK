@@ -23,6 +23,10 @@ class AuthRepositoryImpl @Inject constructor(
     accessInfoDataSource.saveAccessInfo(response)
   }
 
+  override fun forgetAccessInformation() {
+    accessInfoDataSource.forgetAccessInfo()
+  }
+
   override fun getAccessInformation(): AccessInfo? {
     return accessInfoDataSource.getAccessInfo()?.toDomainModel()
   }
