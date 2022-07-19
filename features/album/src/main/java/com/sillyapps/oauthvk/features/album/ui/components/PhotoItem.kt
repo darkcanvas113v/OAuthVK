@@ -20,13 +20,15 @@ import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import com.sillyapps.oauthvk.common.ui.theme.OAuthVKTheme
 import com.sillyapps.oauthvk.domain.vk.models.Photo
+import com.sillyapps.oauthvk.domain.vk.models.getStringId
 import com.sillyapps.oauthvk.features.album.R
 import com.skydoves.landscapist.glide.GlideImage
+import com.sillyapps.oauthvk.common.resources.R as commonR
 
 @Composable
 fun PhotoItem(
   photo: Photo,
-  onClick: () -> Unit
+  onClick: (String) -> Unit
 ) {
 
   var isLoading by remember {
@@ -36,7 +38,7 @@ fun PhotoItem(
   Surface(
     shape = MaterialTheme.shapes.small,
     modifier = Modifier.clickable {
-      onClick()
+      onClick(photo.getStringId())
     }.height(200.dp)
       .width(200.dp)
       .padding(4.dp),
@@ -64,18 +66,16 @@ fun PhotoItem(
       },
       failure = {
         Image(
-          painter = painterResource(id = R.drawable.ic_baseline_broken_image_24),
+          painter = painterResource(id = commonR.drawable.ic_baseline_broken_image_24),
           contentDescription = null,
           colorFilter = ColorFilter.tint(Color.Gray)
         )
 
         isLoading = false
       },
-      previewPlaceholder = R.drawable.ic_baseline_broken_image_24,
+      previewPlaceholder = commonR.drawable.ic_baseline_broken_image_24,
     )
-
   }
-
 }
 
 @Preview
@@ -83,8 +83,8 @@ fun PhotoItem(
 fun PhotoItemPreview() {
   OAuthVKTheme {
     PhotoItem(
-      photo = Photo(url = "", createdIn = 0),
-      onClick = {}
+      photo = Photo(url = "", createdIn = 0, id = 0, ownerId = 0),
+      onClick = {  }
     )
   }
 }

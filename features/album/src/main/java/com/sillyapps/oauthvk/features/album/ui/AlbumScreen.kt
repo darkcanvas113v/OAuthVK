@@ -17,14 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sillyapps.core.ui.components.ShowToast
 import com.sillyapps.oauthvk.features.album.model.AlbumScreenState
-import com.sillyapps.oauthvk.features.album.ui.subscreens.DefaultSubScreen
-import com.sillyapps.oauthvk.features.album.ui.subscreens.LoadingSubScreen
-import com.sillyapps.oauthvk.features.album.ui.subscreens.LoadingSubScreenPreview
+import com.sillyapps.oauthvk.features.album.ui.subscreens.DefaultScreen
+import com.sillyapps.oauthvk.features.album.ui.subscreens.LoadingScreen
 
 @Composable
 fun AlbumScreen(
   stateHolder: AlbumScreenStateHolder,
-  onItemClick: (Int) -> Unit,
+  onItemClick: (String) -> Unit,
   onLogoutButtonClick: () -> Unit
 ) {
 
@@ -36,10 +35,10 @@ fun AlbumScreen(
     Box(
       modifier = Modifier.fillMaxSize()) {
       if (mState.isLoading) {
-        LoadingSubScreen()
+        LoadingScreen()
       }
       else {
-        DefaultSubScreen(
+        DefaultScreen(
           items = mState.photos,
           onItemClick = onItemClick
         )

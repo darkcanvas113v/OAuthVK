@@ -24,6 +24,7 @@ android {
     }
   }
   compileOptions {
+    coreLibraryDesugaringEnabled true
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
@@ -51,8 +52,9 @@ dependencies {
 
   implementation project(":features:album")
   implementation project(":features:auth-screen")
-  implementation project(":features:picture")
+  implementation project(':features:photo')
 
+  // Needed for java-time in api level below 26
   coreLibraryDesugaring desugaringDep
 
   implementation coreKtx

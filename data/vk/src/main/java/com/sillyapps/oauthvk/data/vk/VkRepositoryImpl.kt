@@ -6,6 +6,7 @@ import com.sillyapps.oauthvk.data.vk.models.VkApiResponse
 import com.sillyapps.oauthvk.data.vk.models.converters.toDomainModel
 import com.sillyapps.oauthvk.domain.vk.VkRepository
 import com.sillyapps.oauthvk.domain.vk.models.Albums
+import com.sillyapps.oauthvk.domain.vk.models.Photo
 import kotlinx.coroutines.*
 import retrofit2.Response
 import java.lang.Exception
@@ -27,6 +28,15 @@ class VkRepositoryImpl @Inject constructor(
     makeApiCall(
       apiResponse = vkApi.getAlbum(albumId),
       modelConverter = { it.toDomainModel() }
+    )
+  }
+
+  override suspend fun getPhotoById(photoId: String): Resource<Photo> = withContext(ioDispatcher) {
+    makeApiCall(
+      apiResponse = vkApi.getPhoto(photoId),
+      modelConverter = {
+        it.toDomainModel()
+      }
     )
   }
 

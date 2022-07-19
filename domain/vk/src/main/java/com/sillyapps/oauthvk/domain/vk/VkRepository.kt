@@ -13,4 +13,6 @@ interface VkRepository {
 
   suspend fun getAlbum(albumId: Int): Resource<Album>
 
+  suspend fun getPhotoById(photoId: String): Resource<Photo>
+
 }

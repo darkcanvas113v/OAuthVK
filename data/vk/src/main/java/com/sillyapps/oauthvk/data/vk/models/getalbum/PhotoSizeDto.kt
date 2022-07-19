@@ -6,10 +6,10 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class PhotoSizeDto(
   @Json(name = "height")
-  val height: Int,
+  val height: Int?,
 
   @Json(name = "width")
-  val width: Int,
+  val width: Int?,
 
   @Json(name = "type")
   val type: String,

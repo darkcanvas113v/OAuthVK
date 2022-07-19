@@ -24,5 +24,11 @@ data class PhotoDto(
   val sizes: List<PhotoSizeDto>,
 
   @Json(name = "text")
-  val text: String
+  val text: String,
+
+  @Json(name = "lat")
+  val lat: Int?,
+
+  @Json(name = "long")
+  val long: Int?
 )
