@@ -9,7 +9,7 @@ import com.sillyapps.oauthvk.features.album.ui.AlbumScreen
 
 @Composable
 fun AlbumScreenNavigation(
-  onItemClick: (Int) -> Unit,
+  onItemClick: (String) -> Unit,
   onLogoutButtonClick: () -> Unit,
   vkComponent: VkComponent,
   authComponent: AuthComponent

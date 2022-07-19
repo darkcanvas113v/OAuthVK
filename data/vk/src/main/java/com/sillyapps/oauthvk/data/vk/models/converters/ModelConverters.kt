@@ -1,6 +1,7 @@
 package com.sillyapps.oauthvk.data.vk.models.converters
 
 import com.sillyapps.oauthvk.data.vk.models.getalbum.AlbumDto
+import com.sillyapps.oauthvk.data.vk.models.getalbum.PhotoDto
 import com.sillyapps.oauthvk.data.vk.models.getalbums.AlbumsDto
 import com.sillyapps.oauthvk.domain.vk.models.Album
 import com.sillyapps.oauthvk.domain.vk.models.AlbumItem
@@ -18,8 +19,20 @@ fun AlbumDto.toDomainModel(): Album {
     photos = photos.map {
       Photo(
         createdIn = it.date,
-        url = it.sizes[0].url
+        url = it.sizes[0].url,
+        id = it.id,
+        ownerId = it.ownerId
       )
     }
+  )
+}
+
+fun List<PhotoDto>.toDomainModel(): Photo {
+  val photo = get(0)
+  return Photo(
+    createdIn = photo.date,
+    url = photo.sizes[0].url,
+    id = photo.id,
+    ownerId = photo.ownerId
   )
 }

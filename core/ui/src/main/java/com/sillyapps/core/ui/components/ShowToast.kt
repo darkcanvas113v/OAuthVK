@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.LocalContext
 @Composable
 fun ShowToast(
   message: String,
-  duration: Int = Toast.LENGTH_SHORT
+  duration: Int = Toast.LENGTH_LONG
 ) {
   val context = LocalContext.current
 
