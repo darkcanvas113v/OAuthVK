@@ -1,5 +1,6 @@
 package com.sillyapps.oauthvk.features.photo.ui.subscreens
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -29,7 +30,8 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun BoxScope.DefaultScreen(
-  photo: PhotoUIModel
+  photo: PhotoUIModel,
+  onCacheImage: (Bitmap?) -> Unit
 ) {
 
   Text(
@@ -58,11 +60,15 @@ fun BoxScope.DefaultScreen(
       val drawable = imageState.drawable
 
       if (drawable != null) {
+        val bitmap = drawable.toBitmap()
         Image(
-          bitmap = drawable.toBitmap().asImageBitmap(),
+          bitmap = bitmap.asImageBitmap(),
           contentDescription = null,
           modifier = Modifier.fillMaxSize()
         )
+        LaunchedEffect(photo) {
+          onCacheImage(bitmap)
+        }
       }
       isLoading = false
     },
@@ -72,6 +78,7 @@ fun BoxScope.DefaultScreen(
         contentDescription = null,
         colorFilter = ColorFilter.tint(Color.Gray)
       )
+      onCacheImage(null)
 
       isLoading = false
     },
@@ -87,7 +94,10 @@ fun DefaultScreenPreview() {
   OAuthVKTheme {
     Surface() {
       Box(modifier = Modifier.fillMaxSize()) {
-        DefaultScreen(photo = PhotoUIModel("", "00:00:00", 0))
+        DefaultScreen(
+          photo = PhotoUIModel("", "00:00:00", 0),
+          onCacheImage = {}
+        )
       }
     }
   }

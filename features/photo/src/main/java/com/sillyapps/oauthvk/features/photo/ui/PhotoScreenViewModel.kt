@@ -1,5 +1,6 @@
 package com.sillyapps.oauthvk.features.photo.ui
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sillyapps.core.util.model.Resource
@@ -17,6 +18,8 @@ class PhotoScreenViewModel @Inject constructor(
 ): ViewModel(), PhotoScreenStateHolder {
 
   private val mState = MutableStateFlow<PhotoScreenState>(PhotoScreenState.Loading)
+
+  private var imageCache: Resource<Bitmap> = Resource.Loading()
 
   init {
     viewModelScope.launch {
@@ -44,4 +47,17 @@ class PhotoScreenViewModel @Inject constructor(
   override fun getState(): Flow<PhotoScreenState> {
     return mState
   }
+
+  override fun saveBitmap(bitmap: Bitmap?) {
+    imageCache = if (bitmap != null)
+      Resource.Success(bitmap)
+    else
+      Resource.Error("Failed to load image")
+  }
+
+  override fun getBitMap(): Resource<Bitmap> {
+    return imageCache
+  }
+
+
 }
